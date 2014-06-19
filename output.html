@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wordpress changes between 3.6 and 3.7.1</title>
+	<meta charset="utf-8"/>
+	<base href="https://codex.wordpress.org">
+	<style type="text/css">
+	* {
+		line-height: 22px;
+	}
+	section {
+		width: 90%;
+		margin: 0 auto;
+	}
+	h1 {
+		border-bottom-color: rgb(218, 218, 218);
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		color: rgb(51, 51, 51);
+		display: block;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		font-size: 25px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: normal;
+		margin-bottom: 11px;
+		margin-left: 0px;
+		margin-right: 0px;
+		margin-top: 22px;
+		padding-bottom: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
+		padding-top: 0px;
+		text-align: left;
+	}
+	h2 {
+		border-bottom-color: rgb(238, 238, 238);
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-left-color: rgb(238, 238, 238);
+		border-right-color: rgb(238, 238, 238);
+		border-top-color: rgb(238, 238, 238);
+		color: rgb(51, 51, 51);
+		display: block;
+		font-family: Georgia, 'Times New Roman', Times, serif;
+		font-size: 20px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: normal;
+		height: 22px;
+		line-height: 22px;
+		margin-bottom: 4px;
+	}
+	ul {
+		color: rgb(0, 0, 0);
+		font-family: sans-serif;
+		font-size: 13px;
+		font-variant: normal;
+		list-style-type: square;
+		text-align: left;
+	}
+	</style>
+</head>
+<body>
+<header>
+	<h1> Wordpress Changes between 3.6 and 3.7.1 </h1>
+</header>
+	
+	<section>
+		<h2>General</h2>
+		<ul>
+		<li> Use digraphs for German umlauts in <a href="/Function_Reference/remove_accents" title="Function Reference/remove accents">remove_accents()</a>
+</li>
+<li> Use Ellipses instead of …
+</li>
+<li> Consistently apply 'register' filter
+</li>
+<li> Automatically <a href="/Function_Reference/esc_url" title="Function Reference/esc url">esc_url()</a> the URL echoed by <a href="/Function_Reference/the_permalink" title="Function Reference/the permalink">the_permalink()</a>
+</li>
+<li> Allow developers to specify an Accept-Encoding header in WP_Http::accept_encoding()
+</li>
+<li> Pass tag object and args array to topic_count_text_callback from <a href="/Function_Reference/wp_generate_tag_cloud" title="Function Reference/wp generate tag cloud">wp_generate_tag_cloud()</a>
+</li>
+<li> Use <a href="/Function_Reference/wp_unslash" title="Function Reference/wp unslash">wp_unslash()</a> instead of stripslashes_deep
+</li>
+<li> Improve the performance of <a href="/Function_Reference/backslashit" title="Function Reference/backslashit">backslashit()</a> by avoiding regular expressions
+</li>
+<li> Disallow accidental or negligent deregistering of critical scripts in the admin. Covers jQuery, jQuery UI, Underscore, and Backbone
+</li>
+<li> Remove <a href="/Function_Reference/the_title_attribute" title="Function Reference/the title attribute">the_title_attribute()</a> from anchors with <a href="/Function_Reference/the_title" title="Function Reference/the title">the_title()</a> as text
+</li>
+<li> Display username (user_login) rather than user_nicename in Toolbar below username
+</li><li> Use official MIME types for Windows Media file extensions
+</li>
+<li> Redirect after save on options-permalink.php to ensure permalinks are fully flushed
+</li>
+<li> Only show database errors if both WP_DEBUG and WP_DEBUG_DISPLAY are enabled
+</li><li> Optional filters for background updates, to allow for fine-grained control
+</li>
+<li> Advanced Date Queries for posts now includes date ranges, older/newer than options, and more
+</li>
+<li> Multisite now has <code>wp_get_sites()</code> to list all sites on the network
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Posts</h2>
+		<ul>
+		<li> The <a href="/Revision_Management" title="Revision Management" class="mw-redirect">Revision Management</a> UI saw significant improvement
+</li>
+<li> <a href="/Shortcode" title="Shortcode">Shortcode</a> attributes can now be filtered via <tt>shortcode_atts_$shortcode</tt> hook
+</li>
+<li> The ability to change post formats was removed from Quick Edit
+</li>
+<li> A 'not_found' label was added for non-hierarchical taxonomys
+</li>
+<li> Better UX for dealing with multiple users editing the same content (aka Post Locking)
+</li>
+<li> Audio/Video support <a href="http://make.wordpress.org/core/2013/04/08/audio-video-support-in-core/" class="external text" title="http://make.wordpress.org/core/2013/04/08/audio-video-support-in-core/">More Info</a>
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Media</h2>
+		<ul>
+		<li> Add <a href="/oEmbed" title="oEmbed" class="mw-redirect">oEmbed</a> support for Rdio and Spotify
+</li>
+<li> .webm (video/webm) was added to the MIME types list
+</li>
+<li> The <a href="/Media_Library_Screen" title="Media Library Screen">Media Library</a> can now be sorted by Author name
+</li>
+<li> Bug fixed where initial gallery link-to setting wasn't applied
+</li>
+<li> Return from <a href="/Function_Reference/image_downsize" title="Function Reference/image downsize">image_downsize()</a> earlier if a custom resize function is used
+</li>
+<li> Orientation information was added to items in <a href="/Function_Reference/gallery_shortcode" title="Function Reference/gallery shortcode">gallery_shortcode()</a>
+</li>
+<li> New Audio and Video previews are available on the <a href="/Media_Library_Screen" title="Media Library Screen">Media</a> &gt; <a href="/Edit_Media" title="Edit Media">Edit</a> Screen
+</li>
+<li> Added <a href="/Function_Reference/wp_audio_shortcode" title="Function Reference/wp audio shortcode">wp_audio_shortcode()</a> and <a href="/Function_Reference/wp_video_shortcode" title="Function Reference/wp video shortcode">wp_video_shortcode()</a>
+</li><li> Add the image file size information in the attachment editing screen
+</li>
+<li> Fix issue with <tt>orderby</tt> attribute getting removed from updated <tt>[gallery]</tt> shortcodes
+</li>
+<li> Stop linking to non-public post types from media screens
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Comments</h2>
+		<ul>
+		<li> Improve <a href="/Function_Reference/wp_list_comments" title="Function Reference/wp list comments">wp_list_comments()</a> markup
+</li>
+<li> Add the ability to use HTML5 input types in the comment form
+</li><li> Add commenter IP address on the Edit Comment screen
+</li>
+<li> Remove generated avatars from comment moderation screens
+</li>
+<li> Make email recipients filterable in <a href="/Function_Reference/wp_notify_moderator" title="Function Reference/wp notify moderator">wp_notify_moderator()</a>
+</li>
+<li> Add ability to filter comment screen by post type
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Appearance</h2>
+		<ul>
+		<li> The <a href="/Navigation_Menus" title="Navigation Menus">Navigation Menus</a> UI got a significant refresh
+</li>
+<li> The Customizer can now be accessed via the Appearance menu
+</li>
+<li> Screen options can now be added to the <a href="/Appearance_Screen" title="Appearance Screen" class="mw-redirect">Appearance</a> &gt; <a href="/Appearance_Widgets_Screen" title="Appearance Widgets Screen">Widgets</a> Screen
+</li><li> Only show a custom header image preview when an image is actually set
+</li>
+<li> Display Customizer control descriptions
+</li>
+<li> Enable the Customizer to load the home URL
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Plugins</h2>
+		<ul>
+		<li> Prevent plugins from overriding jQuery in the admin
+</li>
+<li> Prevent plugins with certain filenames from breaking links in the admin menu
+</li><li> Fix plugin search errors related to PHP 5.4
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Users</h2>
+		<ul>
+		<li> Remove the three default contact methods (AIM, YIM, Jabber) for new installs.
+</li>
+<li> Pass old roles to <a href="/Plugin_API/Action_Reference/set_user_role" title="Plugin API/Action Reference/set user role">set_user_role</a> action
+</li>
+<li> The workflow for deleting users has been improved
+</li><li> Ensure that the <tt>user_activation_key</tt> is hashed in the database
+</li>
+<li> Trim leading and trailing spaces from passwords when saving
+</li>
+<li> Streamline the behavior of the default password nag after login
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Settings</h2>
+		<ul>
+		<li> Allow any post format to be set as default in <a href="/Settings_General_Screen" title="Settings General Screen">Settings</a> &gt; <a href="/Settings_Writing_Screen" title="Settings Writing Screen">Writing</a> Screen
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Accessibility</h2>
+		<ul>
+		<li> Better keyboard/screen reader accessibility in the Nav Menus UI
+</li>
+<li> Background image's "select a file" link works with keyboard navigation
+</li><li> Make list table row actions keyboard accessible
+</li>
+<li> Fix issue with a broken "Close" button on refresh in the Customizer
+</li>
+<li> Improve default color contrast ratios in the default themes
+</li>
+<li> After a post is updated, only focus the "Title" field if it's empty
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Bug Fixes</h2>
+		<ul>
+		<li> Strip slashes from passwords sent to new users by email
+</li>
+<li> Make sure the url returned by <a href="/Function_Reference/post_preview" title="Function Reference/post preview">post_preview()</a> is filterable with <a href="/index.php?title=Plugin_API/Filter_Reference/preview_post_link&amp;action=edit&amp;redlink=1" class="new" title="Plugin API/Filter Reference/preview post link (page does not exist)">preview_post_link</a>
+</li>
+<li> Fix handling of '0' as meta_value argument in <a href="/Function_Reference/get_pages" title="Function Reference/get pages">get_pages()</a>
+</li>
+<li> Correctly print 'after' data when scripts are concatenated in <a href="/Class_Reference/WP_Styles" title="Class Reference/WP Styles">WP_Styles</a> class
+</li>
+<li> Properly truncate UTF-8 post slugs in <a href="/Function_Reference/wp_unique_post_slug" title="Function Reference/wp unique post slug">wp_unique_post_slug()</a>
+</li>
+<li> Avoid PHP notices in Media Library if an attachment parent does not exist
+</li>
+<li> Fix some tabbing issues on the post editing screen
+</li>
+<li> Avoid notice by checking for user agent in <a href="/Function_Reference/wp_new_comment" title="Function Reference/wp new comment">wp_new_comment()</a>
+</li>
+<li> Avoid notice in <a href="/index.php?title=Function_Reference/parent_dropdown&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/parent dropdown (page does not exist)">parent_dropdown()</a> by checking if post exists before testing post id
+</li>
+<li> Prevent an unintended visibility change from "Password protected" to "Public" when updating the post
+</li>
+<li> Avoid a warning in mb_internal_encoding by making sure we have a charset first
+</li>
+<li> Fix unnecessarily persistent "pending email change" admin message
+</li>
+<li> Ensure we strictly compare 'all options' and 'not options' when protecting these special options
+</li>
+<li> Make sure to reset the modal after gallery insertion
+</li>
+<li> Add sanity checks on image metadata to avoid warnings
+</li>
+<li> Avoid an undefined index notice in <a href="/Function_Reference/get_post_type_archive_feed_link" title="Function Reference/get post type archive feed link">get_post_type_archive_feed_link()</a>
+</li>
+<li> Avoid notices when array args are missing in <a href="/Class_Reference/WP_Image_Editor" title="Class Reference/WP Image Editor">WP_Image_Editor::multi_resize()</a>
+</li>
+<li> Fix notice in <a href="/Function_Reference/wp_generate_attachment_metadata" title="Function Reference/wp generate attachment metadata">wp_generate_attachment_metadata()</a>
+</li>
+<li> Avoid PHP notices when deleting or restoring an item that no longer exists
+</li><li> Fix terms with a post count of 0 returning if 'hide_empty' is true.
+</li>
+<li> Fix allowing https URL enclosures
+</li>
+<li> Fixed bug with is_day by checking bad dates and redirect, instead of 404ing.
+</li>
+<li> Avoid using the *_exists() functionality on ncFTPd servers
+</li>
+<li> Allow a WP_Error return from <a href="/Function_Reference/register_new_user" title="Function Reference/register new user">register_new_user()</a>
+</li>
+<li> Hide the custom header image preview unless an image is set
+</li>
+<li> Add signup_id primary key to $wpdb-&gt;signups
+</li>
+<li> Fix issue with deleting terms shared across taxonomies from deleting associated nav menus
+</li>
+<li> Cast $labels to array in <a href="/Function_Reference/get_taxonomy_labels" title="Function Reference/get taxonomy labels">get_taxonomy_labels()</a> and <a href="/index.php?title=Function_Reference/_get_custom_object_labels&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/ get custom object labels (page does not exist)">_get_custom_object_labels()</a> to avoid failure
+</li>
+<li> Correct rewrite tag for hierarchical post types without a query_var.
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Multisite</h2>
+		<ul>
+		<li> Pass blog_id to the wpmu_drop_tables filter
+</li><li> Introduce <a href="/Function_Reference/wp_get_sites" title="Function Reference/wp get sites">wp_get_sites()</a> [25445]
+</li>
+<li> Introduce <a href="/index.php?title=Function_Reference/wp_maybe_update_network_site_counts&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/wp maybe update network site counts (page does not exist)">wp_maybe_update_network_site_counts()</a> [25621]
+</li>
+<li> Introduce <a href="/index.php?title=Function_Reference/wp_maybe_update_network_user_counts&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/wp maybe update network user counts (page does not exist)">wp_maybe_update_network_user_counts()</a> [25621]
+</li>
+<li> Introduce <a href="/index.php?title=Function_Reference/wp_update_network_site_counts&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/wp update network site counts (page does not exist)">wp_update_network_site_counts()</a> [25621]
+</li>
+<li> Introduce <a href="/index.php?title=Function_Reference/wp_update_network_user_counts&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/wp update network user counts (page does not exist)">wp_update_network_user_counts()</a> [25621]
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Classes</h2>
+		<ul>
+		<li> XML-RPC: Return an error for getRecentPosts (mw and blogger) if the user does not have edit_posts
+</li>
+<li> XML-RPC: Standardize home/site url labels with core labels
+</li>
+<li> Preserve alpha in <a href="/index.php?title=Class_Reference/WP_Image_Editor_GD&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Image Editor GD (page does not exist)">WP_Image_Editor_GD</a> when images are not resized
+</li>
+<li> Make sure WP_Http funnels all redirect requests through <a href="/HTTP_API" title="HTTP API">WP_Http::request()</a> to ensure the proper transport is used
+</li><li> Introduce <a href="/index.php?title=Class_Reference/WP_Automatic_Updater&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Automatic Updater (page does not exist)">WP_Automatic_Updater</a> class [22704]
+</li>
+<li> Introduce <a href="/index.php?title=Class_Reference/Automatic_Upgrader_Skin&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/Automatic Upgrader Skin (page does not exist)">Automatic_Upgrader_Skin</a> class [25421]
+</li>
+<li> Introduce <a href="/index.php?title=Class_Reference/Headerless_Upgrader_Skin&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/Headerless Upgrader Skin (page does not exist)">Headerless_Upgrader_Skin</a> class [25566]
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Functions</h2>
+		<ul>
+		<li> An arg parameter was added for <a href="/Function_Reference/wp_nonce_url" title="Function Reference/wp nonce url">wp_nonce_url()</a>
+</li>
+<li> Allow paths with two consecutive dots to be passed to <a href="/Function_Reference/home_url" title="Function Reference/home url">home_url()</a> and all related *_url() functions
+</li>
+<li> Document 7th parameter, $callback_args in <a href="/Function_Reference/add_meta_box" title="Function Reference/add meta box">add_meta_box()</a>
+</li>
+<li> Confirm a user exists before deleting them in <a href="/Function_Reference/wp_delete_user" title="Function Reference/wp delete user">wp_delete_user()</a> and <a href="/Function_Reference/wpmu_delete_user" title="Function Reference/wpmu delete user">wpmu_delete_user()</a>
+</li>
+<li> Return WP_Error from <a href="/index.php?title=Function_Reference/wp_crop_image&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/wp crop image (page does not exist)">wp_crop_image()</a> if saving has failed
+</li>
+<li> Bail early with correct WP_Error if invalid post ID passed to <a href="/Function_Reference/wp_insert_post" title="Function Reference/wp insert post">wp_insert_post()</a>
+</li>
+<li> Remove duplicate calls to <a href="/Function_Reference/add_new_user_to_blog" title="Function Reference/add new user to blog">add_new_user_to_blog()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_add_id3_tag_data" title="Function Reference/wp add id3 tag data">wp_add_id3_tag_data()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_read_video_metadata" title="Function Reference/wp read video metadata">wp_read_video_metadata()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_read_audio_metadata" title="Function Reference/wp read audio metadata">wp_read_audio_metadata()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_nav_menu_disabled_check" title="Function Reference/wp nav menu disabled check">wp_nav_menu_disabled_check()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_nav_menu_update_menu_items" title="Function Reference/wp nav menu update menu items">wp_nav_menu_update_menu_items()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/do_accordion_sections" title="Function Reference/do accordion sections">do_accordion_sections()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_slash" title="Function Reference/wp slash">wp_slash()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_unslash" title="Function Reference/wp unslash">wp_unslash()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_is_writable" title="Function Reference/wp is writable">wp_is_writable()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_auth_check_load" title="Function Reference/wp auth check load">wp_auth_check_load()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_auth_check" title="Function Reference/wp auth check">wp_auth_check()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_tag_regex" title="Function Reference/get tag regex">get_tag_regex()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_registration_url" title="Function Reference/wp registration url">wp_registration_url()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_heartbeat_settings" title="Function Reference/wp heartbeat settings">wp_heartbeat_settings()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_mediaelement_fallback" title="Function Reference/wp mediaelement fallback">wp_mediaelement_fallback()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_get_audio_extensions" title="Function Reference/wp get audio extensions">wp_get_audio_extensions()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_audio_shortcode" title="Function Reference/wp audio shortcode">wp_audio_shortcode()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_get_video_extensions" title="Function Reference/wp get video extensions">wp_get_video_extensions()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_video_shortcode" title="Function Reference/wp video shortcode">wp_video_shortcode()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_embed_handler_audio" title="Function Reference/wp embed handler audio">wp_embed_handler_audio()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_embed_handler_video" title="Function Reference/wp embed handler video">wp_embed_handler_video()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_attached_media" title="Function Reference/get attached media">get_attached_media()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_post_galleries" title="Function Reference/get post galleries">get_post_galleries()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_post_galleries_images" title="Function Reference/get post galleries images">get_post_galleries_images()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_post_gallery" title="Function Reference/get post gallery">get_post_gallery()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_post_gallery_images" title="Function Reference/get post gallery images">get_post_gallery_images()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_post_revision_title_expanded" title="Function Reference/wp post revision title expanded">wp_post_revision_title_expanded()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/paginate_content" title="Function Reference/paginate content">paginate_content()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/get_paged_content" title="Function Reference/get paged content">get_paged_content()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_revisions_enabled" title="Function Reference/wp revisions enabled">wp_revisions_enabled()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_revisions_to_keep" title="Function Reference/wp revisions to keep">wp_revisions_to_keep()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_text_diff_with_count" title="Function Reference/wp text diff with count">wp_text_diff_with_count()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/shortcode_exists" title="Function Reference/shortcode exists">shortcode_exists()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/has_shortcode" title="Function Reference/has shortcode">has_shortcode()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_parse_post_content" title="Function Reference/wp parse post content" class="mw-redirect">wp_parse_post_content()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_remove_object_terms" title="Function Reference/wp remove object terms">wp_remove_object_terms()</a>
+</li>
+<li> Introduce <a href="/Function_Reference/wp_add_object_terms" title="Function Reference/wp add object terms">wp_add_object_terms()</a>
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Filters</h2>
+		<ul>
+		<li> Add <a href="/Plugin_API/Filter_Reference/self_link" title="Plugin API/Filter Reference/self link">self_link</a> in <a href="/index.php?title=Function_Reference/self_link&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/self link (page does not exist)">self_link()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/get_comments_link" title="Plugin API/Filter Reference/get comments link">get_comments_link</a> in <a href="/index.php?title=Function_Reference/get_comments_link&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/get comments link (page does not exist)">get_comments_link()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/comments_link_feed" title="Plugin API/Filter Reference/comments link feed">comments_link_feed</a> in <a href="/index.php?title=Function_Reference/comments_link_feed&amp;action=edit&amp;redlink=1" class="new" title="Function Reference/comments link feed (page does not exist)">comments_link_feed()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/comment_link" title="Plugin API/Filter Reference/comment link">comment_link</a> in <a href="/Function_Reference/get_comment_link" title="Function Reference/get comment link">get_comment_link()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/nav_menu_link_attributes" title="Plugin API/Filter Reference/nav menu link attributes">nav_menu_link_attributes</a> in <a href="/Class_Reference/Walker_Nav_Menu" title="Class Reference/Walker Nav Menu">Walker_Nav_Menu::start_el()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/wp_revisions_to_keep" title="Plugin API/Filter Reference/wp revisions to keep">wp_revisions_to_keep</a> in <a href="/Function_Reference/wp_revisions_to_keep" title="Function Reference/wp revisions to keep">wp_revisions_to_keep()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/wp_link_pages" title="Plugin API/Filter Reference/wp link pages">wp_link_pages</a> in <a href="/index.php?title=Functions_Reference/wp_link_pages&amp;action=edit&amp;redlink=1" class="new" title="Functions Reference/wp link pages (page does not exist)">wp_link_pages()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/search_form_format" title="Plugin API/Filter Reference/search form format">search_form_format</a> in <a href="/Function_Reference/get_search_form" title="Function Reference/get search form">get_search_form()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/user_search_columns" title="Plugin API/Filter Reference/user search columns">user_search_columns</a> in <a href="/Class_Reference/WP_User_Query" title="Class Reference/WP User Query">WP_User_Query::prepare_query()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/wp_http_accept_encoding" title="Plugin API/Filter Reference/wp http accept encoding">wp_http_accept_encoding</a> in <a href="/index.php?title=Class_Reference/WP_Http_Encoding&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Http Encoding (page does not exist)">WP_Http_Encoding::accept_encoding()</a>
+</li>
+<li> Add <a href="/Plugin_API/Filter_Reference/widget_meta_poweredby" title="Plugin API/Filter Reference/widget meta poweredby">widget_meta_poweredby</a> in <a href="/index.php?title=Class_Reference/WP_Widget_Meta&amp;action=edit&amp;redlink=1" class="new" title="Class Reference/WP Widget Meta (page does not exist)">WP_Widget_Meta::widget()</a>
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Scripts, External Libraries</h2>
+		<ul>
+		<li> Update to jQuery Color 2.2.1
+</li>
+<li> Update to Backbone 1.0.0
+</li>
+<li> Update to jQuery UI 1.10.3
+</li>
+<li> Services_JSON 1.0.3
+</li>
+<li> Iris 1.0.3
+</li>
+<li> hoverIntent r7
+</li>
+<li> MediaElement.js 2.11.1 (New)
+</li>
+<li> getid3 1.9.7 (New)
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Deprecated</h2>
+		<ul>
+		<li> Deprecate <a href="/Function_Reference/wp_convert_bytes_to_hr" title="Function Reference/wp convert bytes to hr">wp_convert_bytes_to_hr()</a> in favor of <a href="/Function_Reference/size_format" title="Function Reference/size format">size_format()</a>
+</li>
+<li> Deprecate <a href="/Function_Reference/get_user_id_from_string" title="Function Reference/get user id from string">get_user_id_from_string()</a> in favor of <a href="/Function_Reference/get_user_by" title="Function Reference/get user by">get_user_by()</a> where `$field` is 'email' or 'login'
+</li>
+<li> Deprecate <a href="/Class_Reference/wpdb" title="Class Reference/wpdb">wpdb</a>::escape() in favor of <a href="/Class_Reference/wpdb#Protect_Queries_Against_SQL_Injection_Attacks" title="Class Reference/wpdb">wpdb::prepare()</a> or <a href="/Function_Reference/esc_sql" title="Function Reference/esc sql">esc_sql()</a>
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Dashboard</h2>
+		<ul>
+		<li> Make shift + click selection of checkboxes work in both directions
+</li>
+<li> Add RTL body classes to iFrames in the back-end
+</li>
+<li> Actually limit password-protected post passwords to the 20-character limit
+</li>
+<li> Display an error message when logging in with cookies disabled
+</li>
+<li> Fix issue with failed searches reverting to previous search criteria
+</li>
+<li> Fix bad styling when bulk actions are disabled for custom post types
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>External Libraries</h2>
+		<ul>
+		<li> zxcvbn (password strength meter)
+</li>
+		</ul>
+	</section>
+	
+	<section>
+		<h2>Miscellaneous</h2>
+		<ul>
+		<li> EP_ALL_ARCHIVES [24812]
+</li>
+		</ul>
+	</section>
+	
+<footer>
+	<p>Wordpress Changelog is the first ruby project of <a href="https://github.com/kanedo">kanedo</a>. So please give feedback!</p>
+</footer>
+</body>
+</html>

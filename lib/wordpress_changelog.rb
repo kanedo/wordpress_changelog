@@ -27,7 +27,7 @@ module WordpressChangelog
   	def getVersions
   		page = Nokogiri::HTML(open(getVersionsUrl))
   		codex = getCodexUrl
-  		puts page.css("a[title~='Version']").each { |link| 
+  		page.css("a[title~='Version']").each { |link| 
   			version = /(\d\.?)+/.match(link['title'])[0] 
   			unless version.nil?
   				@versions["#{version}"] = "#{codex}#{link['href']}"
@@ -65,7 +65,7 @@ module WordpressChangelog
           }
           version_objects.push(version)
       }
-      puts @categorie_names
+
       categories.each { |e|  
         version_objects.each{|v|
           if v.hasCategory?(e)
