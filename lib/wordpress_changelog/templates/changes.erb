@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wordpress Changes between <%= @versionA %> and <%= @versionB %></title>
+</head>
+<body>
+<header>
+	<h1>Wordpress Changes between <%= @versionA %> and <%= @versionB %></h1>
+</header>
+<section>
+	<% @changes.each do |id, list| %>
+		<%= list %>
+	<% end %>
+</section>
+<footer>
+	<p>Wordpress Changelog is the first ruby project of <a href="https://github.com/kanedo">kanedo</a>. So please give feedback!</p>
+</footer>
+</body>
+</html>

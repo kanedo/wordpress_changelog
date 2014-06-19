@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 require "wordpress_changelog"
+require "json"
 
 instance = WordpressChangelog::Changelog.new
-instance.showWordpressVersions
+changes = JSON.generate(instance.changesBetween("3.6", "3.7.1"))
+
+instance.output("HTML", changes)
