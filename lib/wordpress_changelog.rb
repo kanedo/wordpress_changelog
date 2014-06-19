@@ -2,8 +2,10 @@ require'rubygems'
 require'nokogiri'
 require'open-uri'
 require'set'
+require "erb"
 
 require "wordpress_changelog/version"
+require "wordpress_changelog/view"
 
 module WordpressChangelog
 
@@ -51,8 +53,6 @@ module WordpressChangelog
       version_objects = Array.new
       categories = Set.new
       changes = Hash.new("")
-      changes["_description_"] = "changes between Wordpress Version #{versionA} and #{versionB}"
-
       @versions.select { |key| key <= versionB && key >= versionA }.each{|v, url|
           version = WordpressVersion.new(v, url)
           version.getCategories.each{|c| categories.add(c)}
@@ -61,20 +61,24 @@ module WordpressChangelog
       categories.each { |e|  
         version_objects.each{|v|
           if v.hasCategory?(e)
-            changes[e] += v.getCategory(e)
+            changes[e] += v.getCategory(e).to_s
           end
         }
       }
       return changes
     end
 
-    def output(format, changes)
-      outputHTML(changes)
+    def changes(versionA, versionB, format)
+      changes = changesBetween(versionA, versionB)
+      outputHTML(changes, versionA, versionB)
     end
 
-    def outputHTML(changes)
-      template_file = File.open(File.absolute_path("./wordpress_changelog/templates/changes.erb", __FILE__))
-      puts template_file.read
+    def outputHTML(changes, vA, vB)
+      view = View.new(vA, vB, changes)
+      template_file = File.open(File.dirname(__FILE__) + ("/wordpress_changelog/templates/changes.erb") )
+      renderer = ERB.new(template_file.read)
+      result = renderer.result(view.get_binding)
+      File.open("output.html", 'w') {|f| f.write(result) }
     end
   end
 end

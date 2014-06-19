@@ -21,7 +21,7 @@ module WordpressChangelog
 			category_id = category.previous_element()['id']
 			category_name = category.element_children[0].text
 			category_name.strip!  
-			@categories[category_id] = list
+			@categories[category_id] = list.children()
 			@category_names[category_id] = category_name
 		}
 	end

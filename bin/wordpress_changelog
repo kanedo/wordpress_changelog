@@ -3,6 +3,4 @@ require "wordpress_changelog"
 require "json"
 
 instance = WordpressChangelog::Changelog.new
-changes = JSON.generate(instance.changesBetween("3.6", "3.7.1"))
-
-instance.output("HTML", changes)
+instance.changes("3.6", "3.7.1", "HTML")
