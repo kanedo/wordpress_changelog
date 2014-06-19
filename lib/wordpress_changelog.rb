@@ -24,6 +24,10 @@ module WordpressChangelog
   		getVersions
   	end
 
+    def setOuputFile(file)
+      @outputFile = file
+    end
+
   	def getVersions
   		page = Nokogiri::HTML(open(getVersionsUrl))
   		codex = getCodexUrl
@@ -86,7 +90,7 @@ module WordpressChangelog
       template_file = File.open(File.dirname(__FILE__) + ("/wordpress_changelog/templates/changes.erb") )
       renderer = ERB.new(template_file.read)
       result = renderer.result(view.get_binding)
-      File.open("output.html", 'w') {|f| f.write(result) }
+      File.open(@outputFile, 'w') {|f| f.write(result) }
     end
   end
 end

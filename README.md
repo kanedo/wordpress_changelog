@@ -1,6 +1,6 @@
 # WordpressChangelog
 
-TODO: Write a gem description
+Small tool to gather changes between multiple wordpress versions
 
 ## Installation
 
@@ -22,11 +22,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+	Usage: wordpress_changelog [options]
+	    -s, --show                       show all available version changelogs
+	    -m, --min-version VERSION        Lower Bound of Versions
+	    -n, --max-version VERSION        Upper Bound of Versions
+	    -o, --output-file PATH           path to output file
 
 ## Output
 
-HTML File with all changelogs of versions merged
+HTML File with all changelogs of versions merged. Sample output provided in `output.html`
+
+## TODO
+
+make it pretty. At the moment I don't check if anything is real. I'm assuming this app runs in a perfect little world.
+I don't check if there is any network or even if the codex is available.
 
 ## Contributing
 

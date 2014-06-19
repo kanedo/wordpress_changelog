@@ -2,5 +2,45 @@
 require "wordpress_changelog"
 require "json"
 
+require 'optparse'
+
+options = {}
+options[:show] = false
+options[:format] = "HTML"
+help = nil
+opts = OptionParser.new do |opts|
+  opts.banner = "Small tool to gather changes between multiple wordpress versions\nUsage: #{opts.program_name} [options]"
+
+  opts.on("-s", "--show", "show all available version changelogs") do |v|
+  	options[:show] = true
+  end
+
+  opts.on("-m VERSION", "--min-version VERSION", "Lower Bound of Versions") do |v|
+  	options[:lower_bound] = v
+  end
+
+  opts.on("-n VERSION", "--max-version VERSION", "Upper Bound of Versions") do |v|
+  	options[:upper_bound] = v
+  end
+
+  opts.on("-o PATH", "--output-file PATH", "path to output file") do |v|
+  	options[:output] = v
+  end
+
+  help = opts.help
+end.parse!
+
+if options[:show]
+	instance = WordpressChangelog::Changelog.new
+	instance.showWordpressVersions
+	exit 0
+end
+
+if options[:output].nil?
+	puts help
+	exit 1
+end
+
 instance = WordpressChangelog::Changelog.new
-instance.changes("3.6", "3.7.1", "HTML")
+instance.setOuputFile(options[:output])
+instance.changes(options[:lower_bound], options[:upper_bound], options[:format])
