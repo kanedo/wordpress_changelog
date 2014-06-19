@@ -74,7 +74,7 @@ module WordpressChangelog
     end
 
     def outputHTML(changes, vA, vB)
-      view = View.new(vA, vB, changes)
+      view = View.new(vA, vB, changes, getCodexUrl)
       template_file = File.open(File.dirname(__FILE__) + ("/wordpress_changelog/templates/changes.erb") )
       renderer = ERB.new(template_file.read)
       result = renderer.result(view.get_binding)
