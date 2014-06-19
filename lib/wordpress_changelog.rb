@@ -53,15 +53,23 @@ module WordpressChangelog
       version_objects = Array.new
       categories = Set.new
       changes = Hash.new("")
+      @categorie_names = Hash.new
+
       @versions.select { |key| key <= versionB && key >= versionA }.each{|v, url|
           version = WordpressVersion.new(v, url)
-          version.getCategories.each{|c| categories.add(c)}
+
+          @categorie_names.merge!(version.getCategoryNames)
+          
+          version.getCategories.each{|c| 
+            categories.add(c)
+          }
           version_objects.push(version)
       }
+      puts @categorie_names
       categories.each { |e|  
         version_objects.each{|v|
           if v.hasCategory?(e)
-            changes[e] += v.getCategory(e).to_s
+            changes[e] += v.getCategory(e)
           end
         }
       }
@@ -74,7 +82,7 @@ module WordpressChangelog
     end
 
     def outputHTML(changes, vA, vB)
-      view = View.new(vA, vB, changes, getCodexUrl)
+      view = View.new(vA, vB, changes, getCodexUrl, @categorie_names)
       template_file = File.open(File.dirname(__FILE__) + ("/wordpress_changelog/templates/changes.erb") )
       renderer = ERB.new(template_file.read)
       result = renderer.result(view.get_binding)

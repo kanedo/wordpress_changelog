@@ -9,8 +9,8 @@ module WordpressChangelog
   	def initialize(version, url)
   		@version 		= version
   		@url 			= url
-  		@categories 	= Hash.new
-  		@category_names = Hash.new
+  		@categories 	= Hash.new("")
+  		@category_names = Hash.new("")
   		loadChangedCategories
   	end
 	
@@ -19,9 +19,10 @@ module WordpressChangelog
 		page.css("#bodyContent > h3+ul").each{|list|
 			category = list.previous_element;
 			category_id = category.previous_element()['id']
+			category_id = category_id.gsub(/(_\d+)/, "") 
 			category_name = category.element_children[0].text
 			category_name.strip!  
-			@categories[category_id] = list.children()
+			@categories[category_id] += list.children().to_s
 			@category_names[category_id] = category_name
 		}
 	end
@@ -37,6 +38,10 @@ module WordpressChangelog
 
 	def getCategory(cat)
 		return @categories[cat]
+	end
+
+	def getCategoryNames
+		return @category_names
 	end
 
 	def getCategories
