@@ -20,6 +20,7 @@ tmp
 *.o
 *.a
 mkmf.log
+vendor/*
 
 #sublime
 # workspace files are user-specific
