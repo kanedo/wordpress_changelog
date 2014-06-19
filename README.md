@@ -16,6 +16,10 @@ Or install it yourself as:
 
     $ gem install wordpress_changelog
 
+## Dependencies
+
+	nokogiri http://nokogiri.org/
+
 ## Usage
 
 TODO: Write usage instructions here

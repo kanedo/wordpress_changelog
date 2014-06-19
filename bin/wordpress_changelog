@@ -1,1 +1,5 @@
 #!/usr/bin/env ruby
+require "wordpress_changelog"
+
+instance = WordpressChangelog::Changelog.new
+instance.showWordpressVersions
