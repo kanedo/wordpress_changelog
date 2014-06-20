@@ -3,6 +3,7 @@ require'nokogiri'
 require'open-uri'
 require'set'
 require "erb"
+require 'terminal-table'
 
 require "wordpress_changelog/version"
 require "wordpress_changelog/view"
@@ -37,8 +38,17 @@ module WordpressChangelog
       end
     end
 
-    def showWordpressVersions
-      @versions.each { |key, val|  puts "#{key}" }
+    def showWordpressVersions( pretty=true )
+      if pretty
+        rows = []
+        @versions.keys.each_slice(8) do |version|
+          rows << version
+        end
+        puts "Available Wordpress versions:"
+        puts Terminal::Table.new :rows => rows, :style => {:border_x => "", :border_y => "", :border_i => ""}
+      else
+        @versions.each { |key, val|  puts "#{key}" }
+      end
     end
 
     def changesBetween(versionA, versionB)

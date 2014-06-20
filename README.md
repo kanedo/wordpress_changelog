@@ -19,6 +19,7 @@ Or install it yourself as:
 ## Dependencies
 
 	nokogiri http://nokogiri.org/
+	terminal-table https://github.com/visionmedia/terminal-table
 
 ## Usage
 
