@@ -3,7 +3,6 @@
 <head>
 	<title>Wordpress changes between <%= @versionA %> and <%= @versionB %></title>
 	<meta charset="utf-8"/>
-	<base href="<%= @codexURL %>">
 	<style type="text/css">
 	* {
 		line-height: 22px;
@@ -59,15 +58,33 @@
 		list-style-type: square;
 		text-align: left;
 	}
+	#toc {
+		background: #f1f1f1;
+		border: 1px solid #dadada;
+		-webkit-border-radius: 3px;
+		float: right;
+		margin-left: 16px;
+		padding: 4px 8px;
+		margin-bottom: 12px;
+		font-size: 85%;
+		max-width: 30%;
+	}
 	</style>
 </head>
 <body>
 <header>
 	<h1> Wordpress Changes between <%= @versionA %> and <%= @versionB %> </h1>
+	<div id="toc">
+		<h2>Contents</h2>
+		<ul>
+		<% @categories.each do |id, name| %>
+			<li><a href="#<%=id%>"><%=name%></a></li>
+		<% end %>
+	</div>
 </header>
 	<% @changes.each do |id, list| %>
 	<section>
-		<h2><%= @categories[id] %></h2>
+		<h2 id="<%=id%>"><%= @categories[id] %></h2>
 		<ul>
 		<%= list %>
 		</ul>

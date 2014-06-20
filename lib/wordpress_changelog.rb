@@ -77,6 +77,9 @@ module WordpressChangelog
           end
         }
       }
+      changes.each{|key, change|
+        changes[key] = change.gsub(/href="([^"]*)"/, 'href="'+getCodexUrl+'\1"')
+      }
       return changes
     end
 
