@@ -32,6 +32,8 @@ Or install it yourself as:
 
 HTML File with all changelogs of versions merged. Sample output provided in `output.html`
 
+![screenshot](https://raw.github.com/kanedo/wordpress_changelog/master/screenshot.png)
+
 ## TODO
 
 make it pretty. At the moment I don't check if anything is real. I'm assuming this app runs in a perfect little world.
