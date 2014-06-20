@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Gabriel Bretschner"]
   spec.email         = ["software@kanedo.net"]
   spec.summary       = "Tool to generate a merged changelog of wordpress versions"
-  spec.description   = ""
-  spec.homepage      = ""
+  spec.description   = "Scrapes the Wordpress Codex and merges all changes in to one clear document"
+  spec.homepage      = "https://blog.kanedo.net"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
