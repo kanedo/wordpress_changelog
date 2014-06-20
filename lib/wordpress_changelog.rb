@@ -11,40 +11,40 @@ module WordpressChangelog
 
   class Changelog
 
-  	def getCodexUrl
-  		return "https://codex.wordpress.org"
-  	end
+    def getCodexUrl
+      return "https://codex.wordpress.org"
+    end
 
-  	def getVersionsUrl
-  		return getCodexUrl+"/Category:Versions"
-  	end
+    def getVersionsUrl
+      return getCodexUrl+"/Category:Versions"
+    end
 
-  	def initialize()
-  		@versions = Hash.new
-  		getVersions
-  	end
+    def initialize()
+      @versions = Hash.new
+      getVersions
+    end
 
     def setOuputFile(file)
       @outputFile = file
     end
 
-  	def getVersions
-  		page = Nokogiri::HTML(open(getVersionsUrl))
-  		codex = getCodexUrl
-  		page.css("a[title~='Version']").each { |link| 
-  			version = /(\d\.?)+/.match(link['title'])[0] 
-  			unless version.nil?
-  				@versions["#{version}"] = "#{codex}#{link['href']}"
-  			end
-  		}
-  	end
+    def getVersions
+      page = Nokogiri::HTML(open(getVersionsUrl))
+      codex = getCodexUrl
+      page.css("a[title~='Version']").each { |link| 
+        version = /(\d\.?)+/.match(link['title'])[0] 
+        unless version.nil?
+          @versions["#{version}"] = "#{codex}#{link['href']}"
+        end
+      }
+    end
 
-  	def showWordpressVersions
-  		@versions.each { |key, val|  
-  			puts "#{key}"
-  		}
-  	end
-  	
+    def showWordpressVersions
+      @versions.each { |key, val|  
+        puts "#{key}"
+      }
+    end
+
     def changesBetween(versionA, versionB)
       if @versions["#{versionA}"].nil?
         puts "version #{versionA} does not exist"
@@ -60,14 +60,14 @@ module WordpressChangelog
       @categorie_names = Hash.new
 
       @versions.select { |key| (!versionB.nil? && key <= versionB && key >= versionA) || (key >= versionA && versionB.nil?)}.each{|v, url|
-          version = WordpressVersion.new(v, url)
+        version = WordpressVersion.new(v, url)
 
-          @categorie_names.merge!(version.getCategoryNames)
-          
-          version.getCategories.each{|c| 
-            categories.add(c)
-          }
-          version_objects.push(version)
+        @categorie_names.merge!(version.getCategoryNames)
+
+        version.getCategories.each{|c| 
+          categories.add(c)
+        }
+        version_objects.push(version)
       }
 
       categories.each { |e|  

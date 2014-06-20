@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Wordpress changes between <%= @versionA %> and <%= @versionB %></title>
-	<meta charset="utf-8"/>
-	<style type="text/css">
-	* {
-		line-height: 22px;
-	}
-	section {
-		width: 90%;
-		margin: 0 auto;
-	}
-	h1 {
-		border-bottom-color: rgb(218, 218, 218);
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		color: rgb(51, 51, 51);
-		display: block;
-		font-family: Georgia, 'Times New Roman', Times, serif;
-		font-size: 25px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: normal;
-		margin-bottom: 11px;
-		margin-left: 0px;
-		margin-right: 0px;
-		margin-top: 22px;
-		padding-bottom: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
-		padding-top: 0px;
-		text-align: left;
-	}
-	h2 {
-		border-bottom-color: rgb(238, 238, 238);
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		border-left-color: rgb(238, 238, 238);
-		border-right-color: rgb(238, 238, 238);
-		border-top-color: rgb(238, 238, 238);
-		color: rgb(51, 51, 51);
-		display: block;
-		font-family: Georgia, 'Times New Roman', Times, serif;
-		font-size: 20px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: normal;
-		height: 22px;
-		line-height: 22px;
-		margin-bottom: 4px;
-	}
-	ul {
-		color: rgb(0, 0, 0);
-		font-family: sans-serif;
-		font-size: 13px;
-		font-variant: normal;
-		list-style-type: square;
-		text-align: left;
-	}
+  <title>Wordpress changes between <%= @versionA %> and <%= @versionB %></title>
+  <meta charset="utf-8"/>
+  <style type="text/css">
+    * {
+      line-height: 22px;
+    }
+    section {
+      width: 90%;
+      margin: 0 auto;
+    }
+    h1 {
+      border-bottom-color: rgb(218, 218, 218);
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      color: rgb(51, 51, 51);
+      display: block;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 25px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      margin-bottom: 11px;
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 22px;
+      padding-bottom: 0px;
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-top: 0px;
+      text-align: left;
+    }
+    h2 {
+      border-bottom-color: rgb(238, 238, 238);
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-left-color: rgb(238, 238, 238);
+      border-right-color: rgb(238, 238, 238);
+      border-top-color: rgb(238, 238, 238);
+      color: rgb(51, 51, 51);
+      display: block;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 20px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      height: 22px;
+      line-height: 22px;
+      margin-bottom: 4px;
+    }
+    ul {
+      color: rgb(0, 0, 0);
+      font-family: sans-serif;
+      font-size: 13px;
+      font-variant: normal;
+      list-style-type: square;
+      text-align: left;
+    }
 
-	ul.changelist li:before {
-		content: " (Version " attr(data-version) ") ";
-		font-family: monospace;
-		font-size: 10px;
-	}
-	#toc {
-		background: #f1f1f1;
-		border: 1px solid #dadada;
-		-webkit-border-radius: 3px;
-		float: right;
-		margin-left: 16px;
-		padding: 4px 8px;
-		margin-bottom: 12px;
-		font-size: 85%;
-		max-width: 30%;
-	}
-	</style>
+    ul.changelist li:before {
+      content: " (Version " attr(data-version) ") ";
+      font-family: monospace;
+      font-size: 10px;
+    }
+    #toc {
+      background: #f1f1f1;
+      border: 1px solid #dadada;
+      -webkit-border-radius: 3px;
+      float: right;
+      margin-left: 16px;
+      padding: 4px 8px;
+      margin-bottom: 12px;
+      font-size: 85%;
+      max-width: 30%;
+    }
+  </style>
 </head>
 <body>
-<header>
-	<h1> Wordpress Changes between <%= @versionA %> and <%= @versionB %> </h1>
-	<div id="toc">
-		<h2>Contents</h2>
-		<ul>
-		<% @categories.each do |id, name| %>
-			<li><a href="#<%=id%>"><%=name%></a></li>
-		<% end %>
-	</div>
-</header>
-	<% @changes.each do |id, list| %>
-	<section>
-		<h2 id="<%=id%>"><%= @categories[id] %></h2>
-		<ul class='changelist'>
-		<%= list %>
-		</ul>
-	</section>
-	<% end %>
-<footer>
-	<p>Wordpress Changelog is the first ruby project of <a href="https://github.com/kanedo">kanedo</a>. So please give feedback!</p>
-</footer>
-</body>
-</html>
+  <header>
+    <h1> Wordpress Changes between <%= @versionA %> and <%= @versionB %> </h1>
+    <div id="toc">
+      <h2>Contents</h2>
+      <ul>
+        <% @categories.each do |id, name| %>
+        <li><a href="#<%=id%>"><%=name%></a></li>
+        <% end %>
+      </div>
+    </header>
+    <% @changes.each do |id, list| %>
+    <section>
+      <h2 id="<%=id%>"><%= @categories[id] %></h2>
+      <ul class='changelist'>
+        <%= list %>
+      </ul>
+    </section>
+    <% end %>
+    <footer>
+      <p>Wordpress Changelog is the first ruby project of <a href="https://github.com/kanedo">kanedo</a>. So please give feedback!</p>
+    </footer>
+  </body>
+  </html>
