@@ -50,7 +50,7 @@ module WordpressChangelog
         puts "version #{versionA} does not exist"
         return nil
       end
-      if  versionA > versionB
+      if  !versionB.nil? && versionA > versionB
         puts "version #{versionB} must be greater that #{versionA}"
         return nil
       end
@@ -59,7 +59,7 @@ module WordpressChangelog
       changes = Hash.new("")
       @categorie_names = Hash.new
 
-      @versions.select { |key| key <= versionB && key >= versionA }.each{|v, url|
+      @versions.select { |key| (!versionB.nil? && key <= versionB && key >= versionA) || (key >= versionA && versionB.nil?)}.each{|v, url|
           version = WordpressVersion.new(v, url)
 
           @categorie_names.merge!(version.getCategoryNames)
@@ -81,8 +81,18 @@ module WordpressChangelog
     end
 
     def changes(versionA, versionB, format)
+      versionB = getLatestVersion if versionB.nil?
       changes = changesBetween(versionA, versionB)
       outputHTML(changes, versionA, versionB)
+    end
+
+    def getLatestVersion()
+      @versions.keys.sort
+      version = 0
+      @versions.each_key{|v|
+        version = v
+      }
+      return version
     end
 
     def outputHTML(changes, vA, vB)
