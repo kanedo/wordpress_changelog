@@ -27,7 +27,7 @@ module WordpressChangelog
 				category_id = category_id.gsub(/(_\d+)/, "") 
 				category_name = heading.element_children[0].text
 				category_name.strip!  
-				@categories[category_id] += list.children().to_s
+				@categories[category_id] += list.children().to_s.gsub(/<li>/, '<li data-version="'+@version+'">')
 				@category_names[category_id] = category_name
 			end
 			

@@ -58,6 +58,12 @@
 		list-style-type: square;
 		text-align: left;
 	}
+
+	ul.changelist li:before {
+		content: " (Version " attr(data-version) ") ";
+		font-family: monospace;
+		font-size: 10px;
+	}
 	#toc {
 		background: #f1f1f1;
 		border: 1px solid #dadada;
@@ -85,7 +91,7 @@
 	<% @changes.each do |id, list| %>
 	<section>
 		<h2 id="<%=id%>"><%= @categories[id] %></h2>
-		<ul>
+		<ul class='changelist'>
 		<%= list %>
 		</ul>
 	</section>
