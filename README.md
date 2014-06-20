@@ -32,7 +32,7 @@ Or install it yourself as:
 
 HTML File with all changelogs of versions merged. Sample output provided in `output.html`
 
-![screenshot](https://raw.github.com/kanedo/wordpress_changelog/master/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/kanedo/wordpress_changelog/master/Screenshot.png)
 
 ## TODO
 
