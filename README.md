@@ -39,6 +39,20 @@ HTML File with all changelogs of versions merged. Sample output provided in `out
 make it pretty. At the moment I don't check if anything is real. I'm assuming this app runs in a perfect little world.
 I don't check if there is any network or even if the codex is available.
 
+## changelogs
+
+### 0.0.1 (2014-06-19)
+Initial Version. Basic functionality provided
+
+### 0.0.2 (2014-07-20)
+
+* use latest version if no upper bound is given
+* added table of content to output
+* use correct links to codex
+* get all changes even if divided in multiple lists
+* get changes from sub-headings 
+* indicate version on each change
+
 ## Contributing
 
 1. Fork it ( https://github.com/kanedo/wordpress_changelog/fork )
