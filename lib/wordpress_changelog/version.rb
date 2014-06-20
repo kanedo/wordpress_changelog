@@ -16,14 +16,21 @@ module WordpressChangelog
 	
 	def loadChangedCategories
 		page = Nokogiri::HTML(open(@url))
-		page.css("#bodyContent > h3+ul").each{|list|
+		heading = nil
+		page.css("#bodyContent > h3~ul, #bodyContent > h4~ul").each{|list|
 			category = list.previous_element;
-			category_id = category.previous_element()['id']
-			category_id = category_id.gsub(/(_\d+)/, "") 
-			category_name = category.element_children[0].text
-			category_name.strip!  
-			@categories[category_id] += list.children().to_s
-			@category_names[category_id] = category_name
+			if !category.nil? && (category.name == 'h4' || category.name == 'h3')
+				heading = category
+			end
+			unless heading.nil?
+				category_id = heading.previous_element()['id']
+				category_id = category_id.gsub(/(_\d+)/, "") 
+				category_name = heading.element_children[0].text
+				category_name.strip!  
+				@categories[category_id] += list.children().to_s
+				@category_names[category_id] = category_name
+			end
+			
 		}
 	end
 	def printCategory(cat)
