@@ -31,18 +31,14 @@ module WordpressChangelog
     def getVersions
       page = Nokogiri::HTML(open(getVersionsUrl))
       codex = getCodexUrl
-      page.css("a[title~='Version']").each { |link| 
+      page.css("a[title~='Version']").each do |link| 
         version = /(\d\.?)+/.match(link['title'])[0] 
-        unless version.nil?
-          @versions["#{version}"] = "#{codex}#{link['href']}"
-        end
-      }
+        @versions["#{version}"] = "#{codex}#{link['href']}" unless version.nil?
+      end
     end
 
     def showWordpressVersions
-      @versions.each { |key, val|  
-        puts "#{key}"
-      }
+      @versions.each { |key, val|  puts "#{key}" }
     end
 
     def changesBetween(versionA, versionB)
@@ -54,12 +50,13 @@ module WordpressChangelog
         puts "version #{versionB} must be greater that #{versionA}"
         return nil
       end
+
       version_objects = Array.new
       categories = Set.new
       changes = Hash.new("")
       @categorie_names = Hash.new
 
-      @versions.select { |key| (!versionB.nil? && key <= versionB && key >= versionA) || (key >= versionA && versionB.nil?)}.each{|v, url|
+      @versions.select { |key| (!versionB.nil? && key <= versionB && key >= versionA) || (key >= versionA && versionB.nil?)}.each do |v, url|
         version = WordpressVersion.new(v, url)
 
         @categorie_names.merge!(version.getCategoryNames)
@@ -68,15 +65,13 @@ module WordpressChangelog
           categories.add(c)
         }
         version_objects.push(version)
-      }
+      end
 
-      categories.each { |e|  
+      categories.each do |e|  
         version_objects.each{|v|
-          if v.hasCategory?(e)
-            changes[e] += v.getCategory(e)
-          end
+          changes[e] += v.getCategory(e) if v.hasCategory?(e)
         }
-      }
+      end
       changes.each{|key, change|
         changes[key] = change.gsub(/href="([^"]*)"/, 'href="'+getCodexUrl+'\1"')
       }
@@ -89,7 +84,7 @@ module WordpressChangelog
       outputHTML(changes, versionA, versionB)
     end
 
-    def getLatestVersion()
+    def getLatestVersion
       @versions.keys.sort
       version = 0
       @versions.each_key{|v|
