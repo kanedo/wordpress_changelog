@@ -45,7 +45,7 @@ I don't check if there is any network or even if the codex is available.
 ### 0.0.1 (2014-06-19)
 Initial Version. Basic functionality provided
 
-### 0.0.2 (2014-07-20)
+### 0.0.2 (2014-06-20)
 
 * use latest version if no upper bound is given
 * added table of content to output
